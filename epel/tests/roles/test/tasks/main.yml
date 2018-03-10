@@ -1,0 +1,9 @@
+---
+- name: Check EPEL Repo installed
+  shell: rpm -q epel-release-7-9
+  register: result
+  ignore_errors: true
+
+- assert:
+    that:
+      - result.rc == 0

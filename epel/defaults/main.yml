@@ -1,0 +1,3 @@
+---
+# defaults file for epel
+epel_repo: epel-release-7-9.noarch 

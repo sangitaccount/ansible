@@ -1,0 +1,15 @@
+---
+# tasks file for epel
+  - name: Install EPEL Repo
+    yum:
+      name: "{{ epel_repo }}"
+      state: present
+    ignore_errors: true
+  - name: Install yum utils package
+    yum:
+      name: yum-utils
+      state: present
+
+  - name: Enable epel Repo
+    shell: yum-config-manager --enable epel
+    ignore_errors: true
