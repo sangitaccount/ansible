@@ -1,0 +1,19 @@
+---
+  - hosts: localhost 
+    connection: local
+    gather_facts: false
+    become: false
+    serial: 1
+    run_once: True
+
+    # setting security group dictionary here based on host / sg variables
+    vars:
+      sg_rules_i:
+        - proto: "tcp"
+          from_port: 22
+          to_port: 22 
+          cidr_ip: 0.0.0.0/0 
+
+    # invoke the actual security group role using the new dictionary
+    roles:
+      - { role: ec2-sg, rules_ingress: "{{ sg_rules_i }}", tags: aws-ec2-sg }

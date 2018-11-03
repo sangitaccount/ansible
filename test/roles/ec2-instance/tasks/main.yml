@@ -1,0 +1,39 @@
+---
+# documentation: http://docs.ansible.com/ansible/ec2_module.html
+
+  #- name: "Get subnet id"
+  # ec2_server_subnet_id
+  
+  - name: "Provision AWS ec2 instance {{ inventory_hostname }}"
+    ec2:
+      aws_access_key: "{{ aws_access_key_id }}"
+      aws_secret_key: "{{ aws_secret_access_key }}"
+      region: "{{ aws_region }}"
+      key_name: "{{ aws_ec2_ssh_key_name }}"
+      count_tag:
+        Name: "{{ inventory_hostname }}"
+      group: "{{ aws_ec2_sg_name }}"
+      instance_type: "{{ aws_ec2_instance_type }}"
+      source_dest_check: "{{ aws_ec2_source_dest_check }}"
+      image: "{{ aws_ec2_server_ami }}"
+      wait: yes
+      wait_timeout: 500
+      user_data: "{{ lookup('file', 'user_data.sh') }}"
+      exact_count: "{{ aws_ec2_server_group_count }}"
+      instance_profile_name: "{{ aws_ec2_iam_role }}"
+      volumes:
+      - device_name: /dev/xvda
+        volume_type: gp2
+        volume_size: "{{ aws_ec2_server_root_size_gb }}"
+        delete_on_termination: true
+      instance_tags:
+        Name: "{{ inventory_hostname }}"
+        Environment: "{{ aws_tag_environment }}"
+        Department: "{{ aws_tag_department }}"
+        Owner: "{{ aws_tag_owner }}"
+      monitoring: "{{ aws_ec2_server_monitoring }}"
+      vpc_subnet_id: "{{ aws_ec2_server_subnet_id }}"
+      assign_public_ip: "{{ aws_ec2_server_public_ip }}"
+      private_ip: "{{ aws_ec2_server_private_ip }}"
+    register: ec2
+

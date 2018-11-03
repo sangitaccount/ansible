@@ -1,0 +1,24 @@
+---
+aws_region: "ap-southeast-2"
+
+# common tags
+aws_tag_environment: "Sandpit"
+aws_tag_owner: "MyOwner"
+aws_tag_department: "MyDepartment"
+
+# EC2 defaults
+aws_vpc_id: "vpc-30bd5554"
+aws_ec2_sg_name: "EC2SSH"
+aws_ec2_server_subnet_id: "subnet-0ca77b7a"
+aws_ec2_instance_type: "t2.micro"
+aws_ec2_server_ami: "ami-09b42976632b27e9b"
+aws_ec2_server_root_size_gb: 10
+aws_ec2_server_monitoring: "no"
+aws_ec2_server_group_count: 1
+aws_ec2_source_dest_check: "yes"
+aws_ec2_ssh_key_name: "MyAWS"
+aws_ec2_state: "running"
+aws_ec2_server_public_ip: true
+aws_ec2_server_private_ip: ""
+aws_ec2_iam_role: ""
+#aws_ec2_user_data: ""

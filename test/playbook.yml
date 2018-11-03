@@ -1,0 +1,23 @@
+---
+ - hosts: localhost
+   gather_facts: no
+   vars_prompt:
+    - name: "access_key_id"
+      prompt: "AWS ACCESS KEY ?"
+      private: no
+      register: access_key_id
+    - name: "secret_access_key"
+      prompt: "AWS SECRET ACCESS KEY ?"
+      private: no
+      register: secret_access_key
+
+   pre_tasks:
+     - set_fact:
+         aws_access_key_id: "{{ access_key_id }}"
+     - set_fact:
+         aws_secret_access_key: "{{ secret_access_key }}"
+
+   # security groups
+ - include: aws-ec2-sg.yml
+   # EC2 instances
+ - include: aws-ec2-instance.yml 

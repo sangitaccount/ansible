@@ -1,0 +1,16 @@
+---
+  - name: "Provision AWS ec2 security group {{ inventory_hostname }}"
+    ec2_group:
+      aws_access_key: "{{ aws_access_key_id }}"
+      aws_secret_key: "{{ aws_secret_access_key }}"
+      name: "{{ aws_ec2_sg_name }}"
+      description: "Security Group to allow SSH Access"
+      vpc_id: "{{ aws_vpc_id }}"
+      region: "{{ aws_region }}"
+      state: "present"
+      rules_egress:
+        - proto: "all"
+          from_port: "any"
+          to_port: "any"
+          cidr_ip: "0.0.0.0/0"
+      rules: "{{ rules_ingress }}"

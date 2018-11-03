@@ -1,0 +1,8 @@
+---
+  - hosts: localhost 
+    connection: local
+    gather_facts: false
+    become: false
+    serial: 1
+    roles:
+      - { role: ec2-instance, tags: aws-ec2-instance }
